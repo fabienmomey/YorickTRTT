@@ -1,27 +1,27 @@
 // mp_include, "Ytrtt2D_dyn.i";
-include, "../Ytrtt2D_dyn.i", 1;
+include, "Ytrtt2D_dyn.i", 1;
 
 /* TOMOBJ */
-nx = 256;
-ny = 256;
-nt = 32;
-xoff = 0.0; //FIXME: in cm
-yoff = 0.0; //FIXME: in cm
-s_scl = 0.1; //FIXME: in cm
+nx = 16;
+ny = 16;
+nt = 16;
+xoff = 0.0; //FIXME: in mm
+yoff = 0.0; //FIXME: in mm
+s_scl = 1.0; //FIXME: in mm
 s_deg = 3;
 size_footprint = 10000;
 /* TOMDATA */
 nv = 512;
-voff = 0.0; //FIXME: in cm
-v_scl = 0.1; //FIXME: in cm
+voff = 0.0; //FIXME: in mm
+v_scl = 1.0; //FIXME: in mm
 
 /* PROJECTOR */
 mode = TRTT_FAN_BEAM;
 type = TRTT_SPLINE_DRIVEN;
-ndata = 33;
-Rsc = 100.0; //FIXME: in cm
-// Rcd = 51.2; //FIXME: in cm
-Rsd = 153.6; // Rcd+Rsc;
+ndata = 300;
+Rsc = 1000.0; //FIXME: in mm
+// Rcd = 512.0; //FIXME: in mm
+Rsd = 1536.0; // Rcd+Rsc;
 SNR = 1.e3;
 
 /* FIXME: THETA IS NOW THE ANGLE <Ox,OS> */
@@ -93,6 +93,6 @@ mu_t=1.0;
 regulTV = h_new(weight=[mu_s, mu_s, mu_t],
                 threshold = 1.e-12,
                 options = RGL_TOTVAR_ISOTROPIC);
-XR = trtt_2D_optim_simu_launcher(Cops, trtt_cost_quadratic_opky, use_sparse_coefs=0n, x=array(double,nx,ny,nt), regulTV=regulTV, xmin=, mem=3, viewer=1n, win_viewer=4, win_viewer2=60, maxiter=200, maxeval=200, verbose=1n);
+XR = trtt_2D_optim_simu_launcher(Cops, trtt_cost_quadratic_opky, use_sparse_coefs=0n, x=array(double,nx,ny,nt), regulTV=regulTV, xmin=, mem=3, viewer=1n, win_viewer=4, win_viewer2=60, maxiter=100, maxeval=100, verbose=1n);
 
 // mp_exec, "if (!mp_rank) quit;";
