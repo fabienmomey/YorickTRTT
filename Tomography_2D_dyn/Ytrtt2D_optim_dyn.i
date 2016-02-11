@@ -1483,7 +1483,7 @@ func trtt_2D_optim_simu_launcher(Cops, cost, x=, method=, mem=, frtol=, fatol=, 
     /* Define COST_MAT */
     if (is_void(dweights)) {
         ndata = numberof(Ck_list);
-        nv = h_get(Cops,Ck_list(1)).Yk.nv;
+        nv = h_get(Cops,Ck_list(1)).Ak.Yk.nv;
         dweights = array(1.0, nv, ndata);
     }
 
