@@ -5,6 +5,7 @@ TRTT : iTeraTive Reconstruction for Tomography => code developed with Yorick for
 TRTT is a code used for creating algebraic operators for performing Radon transform for Tomography. It is based on the modelization of the voxelized tomographic object on a basis of B-splines functions, approximated to spherically symmetric basis functions (blobs).
 
 TRTT is implemented with Yorick [http://yorick.sourceforge.net/]. It requires several Yorick tools implemented by Éric Thiébaut for signal processing and inverse problems. These tools are available on Github: [https://github.com/emmt]. 
+
 DO NOT HESITATE TO VISIT, "LIKE" AND "FOLLOW" THIS PAGE ;D !!!
 
 # Requirements
