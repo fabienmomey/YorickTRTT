@@ -16,7 +16,7 @@ Clone and install the following repositories :
 
   		git clone https://github.com/emmt/OptimPack.git
 
-- YTotvar (Edge-preserving regularization for Yorick): 
+YTotvar (Edge-preserving regularization for Yorick): 
   		  
 		git clone https://github.com/emmt/YTotVar.git
 
