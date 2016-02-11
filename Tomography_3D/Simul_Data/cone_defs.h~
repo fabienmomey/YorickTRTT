@@ -1,0 +1,75 @@
+/* Definition of constants for SNM cone-beam reconstruction */
+#define 	PI		      3.14159265358979
+#define         TRTT_WATER_ABSORPTION 0.1928 // (in cm^-1)
+#define         MAX_OBJECTS           25
+#define		MAX_ORB_POINTS	      1024
+#define		degree_to_rad         .01745329251994
+#define		x_pixels	      128
+#define		y_pixels	      128
+#define		z_pixels              128
+#define		slice_pixels	      (x_pixels*y_pixels)
+/*pixel size in cm*/
+#define		x_size		      0.1
+#define 	y_size		      0.1
+/*slice thickness in cm*/	
+#define		z_size		      0.1
+
+/* centre of the slice 51,53,50*/
+#define		x_off		      0.5*(x_pixels-1.0)
+#define		y_off		      0.5*(y_pixels-1.0)
+#define		z_off		      0.5*(z_pixels-1.0)
+/* cone-beam projection */
+#define		u_pixels	      256*10
+#define         u_pixels2             (2*u_pixels)	
+/*u is one direction in the projection plane*/
+#define		v_pixels	      256*10
+#define         v_pixels2             (2*v_pixels)	
+#define		proj_pixels	      (u_pixels*v_pixels)	
+/*v is the other direction*/
+#define		u_size		      0.01
+/*u_size is the sampling size in u, in cm*/
+#define		v_size	              0.01
+/*stretching for cone-beam bpj*/
+#define		stretch_factor 	      4
+#define		u_str_pixels         (stretch_factor*u_pixels)
+#define		v_str_pixels         (stretch_factor*v_pixels)
+/*parameters for 2d filtering*/
+/*u_l is the double of the power of two closest (>=) to u_pixels*/
+#define         u_l                   8192
+#define         nuu                     13 /*u_l = 2^nuu*/
+#define         v_l                   8192
+#define         nuv                     13 /*v_l = 2^nuv*/
+
+/* linogram, i.e. the 2D Radon transform of one cone-beam projection*/
+/*total number of angular samples is dlinoviews (for the two sets
+  of linograms). Angular samples for each set are :
+  v = 2/linoviews ( nv - (linoviews-1)/2)  nv = 0..linoviews-1
+  linoviews MUST be greater than max(u_pixels,v_pixels)
+  largeviews is twice the power of two nearest to linoviews
+*/
+#define         linoviews             512
+#define         dlinoviews            (2*linoviews)
+#define         largeviews            1024
+
+/*number of radial pixels should be at least u_pixels+v_pixels.
+  Linogram software assumes that pixels are square. 
+  u = u_size*(nu - linopixels/2)  nu=0..linopixels-1 
+
+  For the 1D FFTs along u the data are padded to dlinopixels
+  2^nu_dlinopixels = dlinopixels
+  */
+
+#define         linopixels            1024
+#define         dlinopixels           1024
+#define         nu_dlinopixels          10
+
+/* centre of the projection plane used to evaluate the linogram
+   in principle, use u_pixels/2 and v_pixels/2 in all cases */
+#define         voff_trtt              0.0
+#define         uoff_trtt              0.0
+#define		u_offsino	       (0.5*0.1*u_pixels+voff_trtt)*10
+#define		v_offsino	       (0.5*0.1*v_pixels-uoff_trtt)*10
+
+/*parameter used in definition of the function M(mu) in Mix_2dfft.c*/
+#define         mu0                   (PI/30.0)
+

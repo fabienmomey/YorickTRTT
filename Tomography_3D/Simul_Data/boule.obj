@@ -1,0 +1,13 @@
+
+phantom
+
+object 1
+
+ellipsoid
+center 0.0 0.0 0.0
+half-axis 0.625 0.625 0.625
+angles 0.0 0.0
+
+0.025
+
+end

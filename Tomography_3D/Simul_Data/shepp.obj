@@ -1,0 +1,103 @@
+
+phantom
+
+object 1
+
+ellipsoid
+center 0.0 0.0 0.0
+half-axis 0.69 0.81 0.92
+angles 0.0 0.0
+
+2.0
+
+object 2
+
+ellipsoid
+center 0.0 0.0 -0.0184 
+half-axis 0.6624 0.78 0.874
+angles 0.0 0.0 
+
+-0.98
+
+object 3
+
+ellipsoid
+center 0.22 0.0 0.0 
+half-axis 0.11 0.22 0.31
+angles 0.0 -18.0
+
+-0.02
+
+object 4
+
+ellipsoid
+center -0.22 0.0 0.0
+half-axis 0.16 0.28 0.41
+angles 0.0 18.0
+
+-0.02
+
+object 5
+
+ellipsoid
+center 0.0 -0.15 0.35
+half-axis 0.21 0.41 0.25
+angles 0.0 0.0
+
+0.01
+
+object 6
+
+ellipsoid
+center 0.0 0.25 0.1
+half-axis 0.046 0.05 0.046
+angles 0.0 0.0
+
+0.01
+
+object 7
+
+ellipsoid
+center 0.0 0.25 -0.1
+half-axis 0.046 0.05 0.046
+angles 0.0 0.0
+
+0.01
+
+object 8
+
+ellipsoid
+center -0.08 0.0 -0.605 
+half-axis 0.046 0.05 0.023
+angles 90.0 0.0
+
+0.01
+
+object 9
+
+ellipsoid
+center 0.0 0.0 -0.606
+half-axis 0.023 0.02 0.023
+angles 0.0 0.0
+
+0.01
+
+object 10
+
+ellipsoid
+center 0.06 0.0 -0.605
+half-axis 0.023 0.02 0.046
+angles 0.0 0.0
+
+0.01
+
+object 11
+
+ellipsoid
+center 0.0 0.0 0.0
+half-axis 0.69 0.81 0.92
+angles 0.0 0.0
+
+1.0
+
+end
