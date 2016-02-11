@@ -31,15 +31,25 @@ Get TRTT plugin:
 
 Compilation of the TRTT plugin:
 	     
-		go to YoritckTRTT directory
+		$ cd YoritckTRTT/
 
-		$ cd plugin
+		$ cd plugin/
 
 		$ yorick -batch make.i
 
 		$ make
+
+An additional plugin is available, containing the implementation of 2D projectors by the Long & Fessler method [Long, Fessler and Balter, 2010, 3D Forward and Back-Projection for X-Ray CT Using Separable Footprints]. 
+
+   	      	$ cd tomography-LongFessler-model/
+
+		$ yorick -batch make.i
+
+		$ make
+
+		$ make install
 	
-To use the code, go to YoritckTRTT directory. You have to create en environment variable TRTT_PATH specifying the path of the YorickTRTT directory:
+To use the code, go to YoritckTRTT/ directory. You have to create en environment variable TRTT_PATH specifying the path of the YorickTRTT directory:
 
        	   	$ export TRTT_PATH=$(pwd) (if you are at YorickTRTT/)
 
