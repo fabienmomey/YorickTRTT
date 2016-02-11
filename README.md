@@ -41,6 +41,6 @@ Compilation of the TRTT plugin:
 		
 To use the code, go to YoritckTRTT directory. You have to create en environment variable TRTT_PATH specifying the path of the YorickTRTT directory:
 
-       	   	$ export TRTT_PATH=$(pwd) (if you are at YorickTRTT/)
+       	   $ export TRTT_PATH=$(pwd) (if you are at YorickTRTT/)
 
 Go reconstruct hot sources on cold backgrounds and planar movements ;D !!! (Tribute to PG)
