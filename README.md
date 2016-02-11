@@ -43,4 +43,4 @@ To use the code, go to YoritckTRTT directory. You have to create en environment 
 
      	     	$ export TRTT_PATH=$(pwd) (if you are at YorickTRTT/)
 
-Go reconstruct hot sources on cold backgrounds and planar movements ;D !!!
+Go reconstruct hot sources on cold backgrounds and planar movements ;D !!! (Tribute to PG)
