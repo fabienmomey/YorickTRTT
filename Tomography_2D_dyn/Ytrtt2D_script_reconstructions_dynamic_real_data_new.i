@@ -114,8 +114,8 @@ if (is_array(id_invalid))
 
 eps1=1.0; eps2=1.e-6;
 mu_s=10.0; mu_t=10000.0;
-// regulTV = h_new(weight=[mu_s, mu_s, mu_t], threshold = 1.e0, options = RGL_TOTVAR_ISOTROPIC);
-regulTV = h_new(weight=[mu_s, mu_t], threshold = [1.,1.e-6], flag_separable=1n);
+// regulTV = h_new(weight=[mu_s, mu_s, mu_t], threshold = eps1, options = RGL_TOTVAR_ISOTROPIC);
+regulTV = h_new(weight=[mu_s, mu_t], threshold = [eps1, eps2], flag_separable=1n);
 
 XR = trtt_2D_optim_simu_launcher(Cops, trtt_cost_quadratic_mpy_opky, use_sparse_coefs=0n, x=array(double,nx,ny,nt), dweights=dweights, regulTV=regulTV, xmin=0.0, mem=3, viewer=1n, win_viewer=4, win_viewer2=60, maxiter=100, maxeval=100, verbose=1n);
 trtt_plot_slice, XR.x, 16, 5;
