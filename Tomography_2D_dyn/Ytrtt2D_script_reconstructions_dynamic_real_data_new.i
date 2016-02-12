@@ -1,7 +1,8 @@
 // include, "Ytrtt2D_dyn.i", 1;
 mp_include, "Ytrtt2D_dyn.i";
 
-data_dir= "/home/momey/Data/data_CLB_09-11-2011/mvt2d/";
+data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_09-11-2011/img_1.3.46.423632.135428.1320854260.10/";
+// data_dir= "/home/momey/Data/data_CLB_09-11-2011/mvt2d/";
 // data_dir= "/home/momey/Data/data_CLB_09-11-2011/mvt3d/";
 DATA = yhd_restore(data_dir+"Data4TRTT");
 
