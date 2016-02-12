@@ -88,11 +88,11 @@ Htomo = trtt_2D_create_whole_simu_system(data,
 local xref; eq_nocopy, xref, Htomo.Xref.voxels;
 local Cops; eq_nocopy, Cops, Htomo.Cops;
 
-mu_s=1.0;
-mu_t=1.0;
-regulTV = h_new(weight=[mu_s, mu_s, mu_t],
-                threshold = 1.e-12,
-                options = RGL_TOTVAR_ISOTROPIC);
-XR = trtt_2D_optim_simu_launcher(Cops, trtt_cost_quadratic_opky, use_sparse_coefs=0n, x=array(double,nx,ny,nt), regulTV=regulTV, xmin=, mem=3, viewer=1n, win_viewer=4, win_viewer2=60, maxiter=100, maxeval=100, verbose=1n);
+eps1=1.0; eps2=1.e-6;
+mu_s=1.0; mu_t=1.0;
+// regulTV = h_new(weight=[mu_s, mu_s, mu_t], threshold = 1.e0, options = RGL_TOTVAR_ISOTROPIC);
+regulTV = h_new(weight=[mu_s, mu_t], threshold = [1.,1.e-6], flag_separable=1n);
+
+XR = trtt_2D_optim_simu_launcher(Cops, trtt_cost_quadratic_opky, use_sparse_coefs=0n, x=array(double,nx,ny,nt), regulTV=regulTV, xmin=, mem=3, viewer=1n, win_viewer=4, win_viewer2=60, maxiter=1000, maxeval=1000, verbose=1n);
 
 // mp_exec, "if (!mp_rank) quit;";
