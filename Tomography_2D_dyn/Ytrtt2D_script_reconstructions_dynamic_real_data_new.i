@@ -1,8 +1,8 @@
 // include, "Ytrtt2D_dyn.i", 1;
 mp_include, "Ytrtt2D_dyn.i";
 
-data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_09-11-2011/img_1.3.46.423632.135428.1320854260.10/";
-// data_dir= "/home/momey/Data/data_CLB_09-11-2011/mvt2d/";
+// data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_09-11-2011/img_1.3.46.423632.135428.1320854260.10/";
+data_dir= "/home/momey/Data/data_CLB_09-11-2011/mvt2d/";
 // data_dir= "/home/momey/Data/data_CLB_09-11-2011/mvt3d/";
 DATA = yhd_restore(data_dir+"Data4TRTT");
 
@@ -19,7 +19,7 @@ local data; eq_nocopy, data, DATA.data(..,5:);
 /* TOMOBJ */
 nx = 380;
 ny = 380;
-nt = 44;
+nt = 22;
 xoff = -45.0; //FIXME: in mm
 yoff = -20.0; //FIXME: in mm
 s_scl = 1.0; //FIXME: in mm
