@@ -604,7 +604,7 @@ func trtt_2D_optim_define_cost_mat(Cops, dweights, use_sparse_coefs=, matrix=, r
     } else {
         /* Calculate true data transposition */
         WCyT = 0.0;
-        if (use_sparse_coefs & !Cops.exist_sparse_coefs) {
+        if ((!is_void(use_sparse_coefs)||use_sparse_coefs) & !Cops.exist_sparse_coefs) {
             _trtt_2D_sparse_coefs, Cops;
         }
         
