@@ -1,8 +1,8 @@
 // include, "Ytrtt2D_dyn.i", 1;
 mp_include, "Ytrtt2D_dyn.i";
 
-data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_09-11-2011/img_1.3.46.423632.135428.1320854260.10/";
-// data_dir= "/home/momey/Data/data_CLB_09-11-2011/mvt2d/";
+// data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_09-11-2011/img_1.3.46.423632.135428.1320854260.10/";
+data_dir= "/home/momey/Data/data_CLB_09-11-2011/mvt2d/";
 // data_dir= "/home/momey/Data/data_CLB_09-11-2011/mvt3d/";
 DATA = yhd_restore(data_dir+"Data4TRTT");
 
@@ -194,7 +194,9 @@ for (i=1;i<=count;i++) {
 timer_elapsed(count);
 /********************************************/
 
-// /* MA MACHINE */
+mp_exec, "if (!mp_rank) quit;";
+
+// /* MA MACHINE 4 CPUs */
 // /***********************************************/
 // /***** BENCHMARK DATA-FIDELITY WITHOUT MPY *****/
 // [28.4482,0.0116027,28.4659]
@@ -207,3 +209,18 @@ timer_elapsed(count);
 // /********************************************/
 // /****** BENCHMARK REGULARIZATION GLOB *******/
 // [0.0543726,0,0.054364]
+
+// /* KUBILAI 12 CPUs */
+// /***********************************************/
+// /***** BENCHMARK DATA-FIDELITY WITHOUT MPY *****/
+// [36.9016,0.0356,36.9089]
+// /********************************************/
+// /***** BENCHMARK DATA-FIDELITY WITH MPY *****/
+// [8.1876,0.014,8.20008]
+// /********************************************/
+// /******* BENCHMARK REGULARIZATION SEP *******/
+// [0.0832,0,0.0829092]
+// /********************************************/
+// /****** BENCHMARK REGULARIZATION GLOB *******/
+// [0.0828,0,0.0824289]
+

@@ -1,9 +1,10 @@
 // include, "Ytrtt4D.i", 1;
 mp_include, "Ytrtt4D.i";
 
-// data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_09-11-2011/img_1.3.46.423632.135428.1320854260.10/";
-// data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_09-11-2011/img_1.3.46.423632.135428.1320854585.13/";
-data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_patient_02-07-2012/img_1.3.46.423632.141000.1169042526.68/";
+// data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_patient_02-07-2012/img_1.3.46.423632.141000.1169042526.68/";
+// data_dir= "/home/momey/Data/data_CLB_09-11-2011/mvt2d/";
+// data_dir= "/home/momey/Data/data_CLB_09-11-2011/mvt3d/";
+data_dir= "/home/momey/Data/data_CLB_patient_02-07-2012/";
 DATA = yhd_restore(data_dir+"Data4TRTT");
 
 ntheta = DATA.ndata;
@@ -156,7 +157,7 @@ for (u=1; u<=nextr-1; ++u) {
     t_old = dates4(u+1);
 }
 
-window, 1; plg, sig3, dates3(1)+newdates, color="blue";
+// window, 1; plg, sig3, dates3(1)+newdates, color="blue";
 
 /* temporal spline degree */
 t_deg = 1;
@@ -292,3 +293,19 @@ for (i=1;i<=count;i++) {
 }
 timer_elapsed(count);
 /********************************************/
+
+mp_exec, "if (!mp_rank) quit;";
+
+/* KUBILAI 12 CPUs */
+/***********************************************/
+/***** BENCHMARK DATA-FIDELITY WITHOUT MPY *****/
+[1198.77,33.8312,1231.66]
+/********************************************/
+/***** BENCHMARK DATA-FIDELITY WITH MPY *****/
+[151.68,3.8404,155.414]
+/********************************************/
+/******* BENCHMARK REGULARIZATION SEP *******/
+[0.5668,0,0.566145]
+/********************************************/
+/****** BENCHMARK REGULARIZATION GLOB *******/
+[0.9284,0.024,0.951959]
