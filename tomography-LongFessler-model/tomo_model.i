@@ -7,8 +7,6 @@
 if (is_func(plug_in)) plug_in, "tomo_model";
 // setup_package, "tomo_model";
 
-write, format="PID = %d\n", getpid();
-
 struct lf2d_parameters {
   double pixelSize;                        /* detector pixel size */
   double pixelStep;                        /* detector pixel step (>=

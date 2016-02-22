@@ -682,7 +682,7 @@ func trtt_2D_optim_define_cost_mat(Cops, dweights, use_sparse_coefs=, matrix=, r
     return cost_mat;
 }
 
-func trtt_2D_optim_launcher(Cops, cost, x=, method=, xmin=, xmax=, bnd=, mem=, factr=, frtol=, fatol=, pgtol=, maxiter=, maxeval=, dweights=, get_costs=, metrics=, roi=, xref=, use_sparse_coefs=, matrix=, regul=, regulTV=, viewer=, win_viewer=, win_viewer2=, cmin=, cmax=, verbose=, store=)        
+func trtt_2D_optim_simu_launcher(Cops, cost, x=, method=, xmin=, xmax=, bnd=, mem=, factr=, frtol=, fatol=, pgtol=, maxiter=, maxeval=, dweights=, get_costs=, metrics=, roi=, xref=, use_sparse_coefs=, matrix=, regul=, regulTV=, viewer=, win_viewer=, win_viewer2=, cmin=, cmax=, verbose=, store=)        
 /* DOCUMENT trtt_optim_simu_launcher, Cops, cost, x=, method=, mem=, dweights=, metrics=, roi=, xref=, use_sparse_coefs=, matrix=, regul=, regulTV=, xmin=, xmax=, maxiter=, viewer=, win_viewer=, cmin=, cmax=, verbose=, store=
 
    Reconstruction algorithm launcher for TRTT code. The L-BFGS optimization
