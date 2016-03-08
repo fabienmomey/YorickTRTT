@@ -5,8 +5,8 @@ Htomo_name =  "./results/CLBpatient_SD_480x480x288x13_voxel_1mm";
 Htomo_reconst_name = "./results/CLBpatient_SD_480x480x288x13_voxel_1mm.rec";
 mu_s = 1.0;
 mu_t = 1.0;
-eps = 1.e-2; // eps1=1.0; eps2=1.e-6;
-XRname = "XR_mus1_mut1_eps1e-2"; // XRname = "XR_mus1_mut1_eps1-1_eps2-1e-6";
+eps = 1.e-6; // eps1=1.0; eps2=1.e-6;
+XRname = "XR_mus1_mut1_eps1e-6"; // XRname = "XR_mus1_mut1_eps1-1_eps2-1e-6";
 
 if (!is_void(open(Htomo_name, "rb", 1))) {
     write, format="---------- %s reloaded ----------\n", Htomo_name;
