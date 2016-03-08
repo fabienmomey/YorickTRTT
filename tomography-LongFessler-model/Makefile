@@ -1,9 +1,9 @@
 # these values filled in by    yorick -batch make.i
-Y_MAKEDIR=/home/momey/Programmes/easy-yorick-2015-10-20-SPL-pack/arch/linux-x86_64/yorick
-Y_EXE=/home/momey/Programmes/easy-yorick-2015-10-20-SPL-pack/arch/linux-x86_64/yorick/bin/yorick
+Y_MAKEDIR=/home/momey/apps/easy-yorick/arch/linux-x86_64/yorick
+Y_EXE=/home/momey/apps/easy-yorick/arch/linux-x86_64/yorick/bin/yorick
 Y_EXE_PKGS=
-Y_EXE_HOME=/home/momey/Programmes/easy-yorick-2015-10-20-SPL-pack/arch/linux-x86_64/yorick
-Y_EXE_SITE=/home/momey/Programmes/easy-yorick-2015-10-20-SPL-pack/arch/linux-x86_64/yorick
+Y_EXE_HOME=/home/momey/apps/easy-yorick/arch/linux-x86_64/yorick
+Y_EXE_SITE=/home/momey/apps/easy-yorick/arch/linux-x86_64/yorick
 Y_HOME_PKG=
 
 # ----------------------------------------------------- optimization flags
