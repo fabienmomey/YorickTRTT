@@ -1433,6 +1433,8 @@ func trtt_2D_optim_simu_launcher(Cops, cost, x=, method=, mem=, frtol=, fatol=, 
     Ck_list = Cops.Ck_list;
     /* Resulting TOMOBJ */
     X = h_get(Cops,Ck_list(1)).Ak.X;
+
+    if (is_void(viewer)) viewer=0n;
     
     if (is_void(x)) {
         local x; eq_nocopy, x, X.voxels;
