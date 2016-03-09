@@ -107,5 +107,5 @@ regulTV = h_new(weight=mu,
                 threshold = 1.e-2,
                 options = RGL_TOTVAR_ISOTROPIC);
 
-XR = trtt_2D_optim_launcher(Cops, trtt_cost_quadratic_mpy_opky, x=array(double,nx,ny), use_sparse_coefs=0n, dweights=dweights, mem=5, regulTV=regulTV, xmin=0.0, viewer=1n, win_viewer=4, win_viewer2=60, maxiter=20, maxeval=20, verbose=1n);
+XR = trtt_2D_optim_simu_launcher(Cops, trtt_cost_quadratic_mpy_opky, x=array(double,nx,ny), use_sparse_coefs=0n, dweights=dweights, mem=5, regulTV=regulTV, xmin=0.0, viewer=1n, win_viewer=4, win_viewer2=60, maxiter=20, maxeval=20, verbose=1n);
 trtt_plot_vox, XR.x, 5;

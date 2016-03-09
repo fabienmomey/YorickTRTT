@@ -1,12 +1,13 @@
 mp_include, "Ytrtt4D.i";
 // include, "Ytrtt4D.i", 1;
 
-Htomo_name =  "./results/CLBpatient_SD_480x480x288x13_voxel_1mm";
-Htomo_reconst_name = "./results/CLBpatient_SD_480x480x288x13_voxel_1mm.rec";
+Htomo_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_4mm";
+Htomo_reconst_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_4mm.rec";
+
 mu_s = 1.0;
 mu_t = 1.0;
 eps = 1.e-6; // eps1=1.0; eps2=1.e-6;
-XRname = "XR_mus1_mut1_eps1e-6"; // XRname = "XR_mus1_mut1_eps1-1_eps2-1e-6";
+XRname = "XRglob_mus1e0_mut1e0_eps1e-6"; // XRname = "XR_mus1_mut1_eps1-1_eps2-1e-6";
 
 if (!is_void(open(Htomo_name, "rb", 1))) {
     write, format="---------- %s reloaded ----------\n", Htomo_name;
@@ -32,14 +33,14 @@ if (!is_void(open(Htomo_name, "rb", 1))) {
     local data; eq_nocopy, data, DATA.data(..,5:-1);
     
     /* TOMOBJ */
-    nx = 480;
-    ny = 480;
-    nz = 288;
+    nx = 120;
+    ny = 120;
+    nz = 72;
     nt = 13;
     x_off = 72.0; //FIXME: in mm
     y_off = 0.0; //FIXME: in mm
     z_off = 0.0; //FIXME: in mm
-    s_scl = 1.0; //FIXME: in mm
+    s_scl = 4.0; //FIXME: in mm
     s_deg = 3;
     size_footprint = 10000;
     
@@ -211,16 +212,6 @@ if (!is_void(open(Htomo_name, "rb", 1))) {
     dweights(,nv-4:nv,)=0.0;
     dweights(1:5,..)=0.0;
     dweights(nu-4:nu,..)=0.0;
-
-    Htomo_init=yhd_restore("./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_4mm.rec");
-    x_init=h_get(Htomo_init,"XR_mus1_mut1_eps1-2").x;
-
-    nx_init=ny_init=144; nz_init=72;
-    
-    wop = spl_spline_interpolator((indgen(0:nx-1)/(nx-1.))*(nx_init-1.), nx_init, 3, (indgen(0:ny-1)/(ny-1.))*(ny_init-1.), ny_init, 3, (indgen(0:nz-1)/(nz-1.))*(nz_init-1.)., nz_init, 3, indgen(0:nt-1), nt, 0);
-    x_init = wop(spl_spline_samples_to_coefficients(x_init,3,3,3,0));
-
-    h_set_copy, Htomo.X, "voxels", x_init;
     
     h_set, Htomo.Cops, dweights=dweights;
     trtt_4D_save, Htomo, Htomo_name, overwrite=1;
@@ -240,8 +231,8 @@ regulTV = h_new(weight=[mu_s, mu_s, mu_s, mu_t], threshold = eps, options = RGL_
 x_iter = Htomo_reconst.x_iter;
 if (!is_void(x_iter)) h_set_copy, Htomo.X, "voxels", x_iter;
 
-for (i=1; i<=20; ++i) {
-    XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_mpy_opky, mem=3, dweights=dweights, xmin=0.0, regulTV=regulTV, maxiter=10, verbose=1n);
+for (i=1; i<=5; ++i) {
+    XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_mpy_opky, mem=5, dweights=dweights, xmin=0.0, regulTV=regulTV, maxiter=100, verbose=1n);
     
     h_set_copy, Htomo_reconst, XRname, XR;
     x_iter = XR.x;
@@ -251,4 +242,4 @@ for (i=1; i<=20; ++i) {
 
 trtt_4D_save, Htomo, Htomo_name, overwrite=1;
 
-mp_exec, "if (!mp_rank) quit;";
+// mp_exec, "if (!mp_rank) quit;";
