@@ -243,3 +243,24 @@ for (i=1; i<=5; ++i) {
 trtt_4D_save, Htomo, Htomo_name, overwrite=1;
 
 // mp_exec, "if (!mp_rank) quit;";
+
+/*** PETIT SCRIPT POUR ENREGISTRER LA RECONST COURANTE EN FITS (POUR VISU SUR ICY PAR EXEMPLE) ***/
+// include, "Ytrtt4D.i", 1;
+// Htomo_reconst_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_4mm.rec";
+// Htomo_reconst = yhd_restore(Htomo_reconst_name);
+// x_iter = Htomo_reconst.x_iter;
+// nt=13; for (i=1;i<=nt;++i){fits_write,swrite("x_iter%02d.fits",i),x_iter(:,:,:,i);}
+
+/*** TEST EXTENT ***/
+// nx = 120;
+// ny = 120;
+// nz = 72;
+// nt = 13;
+// for (i=1;i<=100;++i) {
+//     x=random(nx,ny,nz,nt);
+//     y=random(nx+2,ny+2,nz+2,nt+1);
+//     xCTy=sum((x*trtt_4D_extended_object_operator(y,1))(*));
+//     Cxy=sum((trtt_4D_extended_object_operator(x)*y)(*));
+//     write, format="xCTy=%f \t Cxy=%f \n", xCTy, Cxy;
+// }
+
