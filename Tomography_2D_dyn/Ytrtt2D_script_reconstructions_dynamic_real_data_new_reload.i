@@ -73,7 +73,7 @@ for (i=1;i<=Nmu_t;++i) {
     }
 }
 
-mp_exec, "if (!mp_rank) quit;";
+// mp_exec, "if (!mp_rank) quit;";
 
 // trtt_plot_slice, XR.x, 16, 5;
 // for(k=1; k<=10*nt; ++k) {
