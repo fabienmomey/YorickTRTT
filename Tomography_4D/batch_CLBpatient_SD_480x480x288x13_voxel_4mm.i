@@ -7,7 +7,7 @@ Htomo_reconst_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_4mm.
 mu_s = 100.0;
 mu_t = 1000.0;
 eps = 1.e-6; // eps1=1.0; eps2=1.e-6;
-XRname = "XRglob_mus1e2_mut1e3_eps1e-6"; // XRname = "XR_mus1_mut1_eps1-1_eps2-1e-6";
+XRname = "XRglob_mus1e2_mut1e3_eps1e-6"; // XRname = "XRsepa_mus1e0_mut1e0_eps1_1e0_eps2_1e-6";
 
 if (!is_void(open(Htomo_name, "rb", 1))) {
     write, format="---------- %s reloaded ----------\n", Htomo_name;
