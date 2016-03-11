@@ -44,7 +44,7 @@ if (is_void(h_get(Htomo,eps_name))) {
     h_set, Htomo, eps_name, h_new();
     trtt_2D_save, Htomo, "dataCLB_new_14_01_2016/results_dataset10_380x380x22_pixel1mm", overwrite=1n;
     Htomo=trtt_2D_load("dataCLB_new_14_01_2016/results_dataset10_380x380x22_pixel1mm");
-    local Cops; eq_nocopy, Cops, Htomo.Cops;
+    eq_nocopy, Cops, Htomo.Cops;
     Ck_list=Cops.Ck_list;
 }
 
@@ -62,12 +62,12 @@ for (i=1;i<=Nmu_t;++i) {
             write, format="%s\n", swrite(format="XR_mus%s_mut%s",name_mu_s(j),name_mu_t(i));
             regulTV = h_new(weight=[mu_s, mu_t], threshold = [eps1, eps2], flag_separable=1n);
             // regulTV = h_new(weight=[mu_s, mu_s, mu_t], threshold = eps, options = RGL_TOTVAR_ISOTROPIC);
-            XR = trtt_2D_optim_simu_launcher(Cops, trtt_cost_quadratic_mpy_opky, use_sparse_coefs=0n, x=array(double,nx,ny,nt), dweights=dweights, regulTV=regulTV, xmin=0.0, mem=3, viewer=0n, win_viewer=4, win_viewer2=60, maxiter=2000, maxeval=2000, verbose=1n);
+            XR = trtt_2D_optim_simu_launcher(Cops, trtt_cost_quadratic_mpy_opky, use_sparse_coefs=0n, x=array(double,nx,ny,nt), dweights=dweights, regulTV=regulTV, xmin=0.0, mem=5, viewer=0n, win_viewer=4, win_viewer2=60, maxiter=2000, maxeval=2000, verbose=1n);
             h_set, h_get(Htomo,eps_name), swrite(format="XR_mus%s_mut%s",name_mu_s(j),name_mu_t(i)), XR;
             
             trtt_2D_save, Htomo, "dataCLB_new_14_01_2016/results_dataset10_380x380x22_pixel1mm", overwrite=1n;
             Htomo=trtt_2D_load("dataCLB_new_14_01_2016/results_dataset10_380x380x22_pixel1mm");
-            local Cops; eq_nocopy, Cops, Htomo.Cops;
+            eq_nocopy, Cops, Htomo.Cops;
             Ck_list=Cops.Ck_list;
         }
     }
