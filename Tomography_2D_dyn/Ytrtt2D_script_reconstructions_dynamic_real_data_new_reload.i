@@ -16,7 +16,7 @@ ndata=numberof(Ck_list);
 
 // trtt_plot_sino, Htomo.Cops, 1, dyn=1n;
 data = trtt_get_sino(Cops,dyn=1n);
- 
+
 /* GO RECONSTRUCTION ! */
 dweights = array(double,nv,ndata);
 dweights(1:511,)=1.0;
