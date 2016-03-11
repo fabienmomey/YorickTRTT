@@ -1,5 +1,5 @@
-include, "Ytrtt2D_dyn.i", 1;
-// mp_include, "Ytrtt2D_dyn.i";
+// include, "Ytrtt2D_dyn.i", 1;
+mp_include, "Ytrtt2D_dyn.i";
 
 /* TOMOBJ */
 nx = 380;
