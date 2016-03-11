@@ -1,5 +1,5 @@
-// include, "Ytrtt2D_dyn.i", 1;
-mp_include, "Ytrtt2D_dyn.i";
+include, "Ytrtt2D_dyn.i", 1;
+// mp_include, "Ytrtt2D_dyn.i";
 
 /* TOMOBJ */
 nx = 380;
@@ -40,13 +40,6 @@ if (is_array(id_invalid))
 eps1=1.e-6; eps2=1.e-6;
 // eps=1.e-3;
 eps_name="R_eps1_1e-6_eps2_1e-6";
-if (is_void(h_get(Htomo,eps_name))) {
-    h_set, Htomo, eps_name, h_new();
-    trtt_2D_save, Htomo, "dataCLB_new_14_01_2016/results_dataset10_380x380x22_pixel1mm", overwrite=1n;
-    Htomo=trtt_2D_load("dataCLB_new_14_01_2016/results_dataset10_380x380x22_pixel1mm");
-    eq_nocopy, Cops, Htomo.Cops;
-    Ck_list=Cops.Ck_list;
-}
 
 name_mu_s=["1e2","5e1","2e1","1e1","5e0","2e0","1e0","5e-1","2e-1","1e-1","5e-2","1e-2","5e-3"];
 name_mu_t=["5e2","1e2","5e1","2e1","1e1","5e0","2e0","1e0","5e-1","2e-1","1e-1"];
@@ -58,6 +51,9 @@ Nmu_t=numberof(mu_t_s);
 for (i=1;i<=Nmu_t;++i) {
     for (j=1;j<=Nmu_s;++j) {        
         mu_s=mu_s_s(j); mu_t=mu_t_s(i);
+        if (is_void(h_get(Htomo,eps_name))) {
+            h_set, Htomo, eps_name, h_new();
+        }
         if (is_void(h_get(h_get(Htomo,eps_name),swrite(format="XR_mus%s_mut%s",name_mu_s(j),name_mu_t(i))))) {
             write, format="%s\n", swrite(format="XR_mus%s_mut%s",name_mu_s(j),name_mu_t(i));
             regulTV = h_new(weight=[mu_s, mu_t], threshold = [eps1, eps2], flag_separable=1n);
