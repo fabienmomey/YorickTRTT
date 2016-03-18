@@ -54,7 +54,7 @@ for (i=1;i<=Nmu_t;++i) {
         if (is_void(h_get(Htomo,eps_name))) {
             h_set, Htomo, eps_name, h_new();
         }
-        if (is_void(h_get(h_get(Htomo,eps_name),swrite(format="XR_mus%s_mut%s",name_mu_s(j),name_mu_t(i))))) {
+        if (is_void(h_get(h_get(Htomo,eps_name),swrite(format="XR_mus%s_mut%s\n",name_mu_s(j),name_mu_t(i))))) {
             write, format="%s\n", swrite(format="XR_mus%s_mut%s",name_mu_s(j),name_mu_t(i));
             regulTV = h_new(weight=[mu_s, mu_t], threshold = [eps1, eps2], flag_separable=1n);
             // regulTV = h_new(weight=[mu_s, mu_s, mu_t], threshold = eps, options = RGL_TOTVAR_ISOTROPIC);
@@ -65,7 +65,9 @@ for (i=1;i<=Nmu_t;++i) {
             Htomo=trtt_2D_load("dataCLB_new_14_01_2016/results_dataset10_380x380x22_pixel1mm");
             eq_nocopy, Cops, Htomo.Cops;
             Ck_list=Cops.Ck_list;
-        }
+        } else {
+	    write, format="%s\n", swrite(format="XR_mus%s_mut%s already done\n",name_mu_s(j),name_mu_t(i));
+	}
     }
 }
 
