@@ -1,13 +1,13 @@
-// include, "Ytrtt4D.i", 1;
-mp_include, "Ytrtt4D.i";
+include, "Ytrtt4D.i", 1;
+// mp_include, "Ytrtt4D.i";
 
 // data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_09-11-2011/img_1.3.46.423632.135428.1320854260.10/";
 // data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_09-11-2011/img_1.3.46.423632.135428.1320854585.13/";
 // data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_patient_02-07-2012/img_1.3.46.423632.141000.1169042526.68/";
 
 /*** KUBILAI ***/
-data_dir= "/home/momey/Data/data_CLB_patient_02-07-2012/";
-// data_dir= "/home/momey/Data/data_CLB_09-11-2011/mvt3d/";
+// data_dir= "/home/momey/Data/data_CLB_patient_02-07-2012/";
+data_dir= "/home/momey/Data/data_CLB_09-11-2011/mvt3d/";
 DATA = yhd_restore(data_dir+"Data4TRTT");
 
 ntheta = DATA.ndata;
@@ -20,14 +20,14 @@ ndata=numberof(theta);
 local data; eq_nocopy, data, DATA.data(..,5:-1);
 
 /* TOMOBJ */
-nx = 120;
-ny = 120;
-nz = 72;
+nx = 15;
+ny = 15;
+nz = 9;
 nt = 13;
 x_off = 72.0; //FIXME: in mm
 y_off = 0.0; //FIXME: in mm
 z_off = 0.0; //FIXME: in mm
-s_scl = 4.0; //FIXME: in mm
+s_scl = 32.0; //FIXME: in mm
 s_deg = 3;
 size_footprint = 10000;
 
@@ -229,25 +229,25 @@ dweights(1:5,..)=0.0;
 dweights(nu-4:nu,..)=0.0;
 h_set, Htomo.Cops, dweights=dweights;
 
-eps1=1.0;
-eps2=1e-6;
-eps_name="Rglob_eps_1e-6";
-h_set, Htomo_reconst, eps_name, h_new();
+eps1=1.e-6;
+eps2=1.e-6;
+// eps_name="Rglob_eps_1e-6";
+// h_set, Htomo_reconst, eps_name, h_new();
 
-mu_s =1.0;
-mu_t =1.0;
-XR_name = "XR_mus1e0_mut1e0";
+mu_s =1000.0;
+mu_t =1000.0;
+// XR_name = "XR_mus1e0_mut1e0";
 
-regulTV = h_new(weight=[mu_s, mu_s, mu_s, mu_t], threshold = eps2, options = RGL_TOTVAR_ISOTROPIC);
-// regulTV = h_new(weight=[mu_s, mu_t], threshold = [eps1,eps2], flag_separable=1n);
+// regulTV = h_new(weight=[mu_s, mu_s, mu_s, mu_t], threshold = eps2, options = RGL_TOTVAR_ISOTROPIC);
+regulTV = h_new(weight=[mu_s, mu_t], threshold = [eps1,eps2], flag_separable=1n);
 
-XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_mpy_opky, dweights=dweights, xmin=0.0, regulTV=regulTV, viewer=0n, win_viewer=2, win_viewer2=60, maxiter=100, maxeval=100, verbose=1n);
+XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_opky, dweights=dweights, regulTV=regulTV, xmin=0.0, viewer=1n, win_viewer=3, win_viewer2=60, maxiter=10, maxeval=10, verbose=1n);
 // trtt3D_plot_slice, XR.x, 3, 35, 6, 3;
-h_set, h_get(Htomo_reconst,eps_name), XR_name, XR;
+// h_set, h_get(Htomo_reconst,eps_name), XR_name, XR;
 
-yhd_save, Htomo_reconst_name, Htomo_reconst, overwrite=1;
-trtt_4D_save, Htomo, Htomo_name, overwrite=1;
-Htomo=trtt_2D_load("dataCLB_new_14_01_2016/results_dataset10_380x380x22_pixel1mm");
-local Cops; eq_nocopy, Cops, Htomo.Cops;
-Ck_list=Cops.Ck_list;
-local dweights; eq_nocopy, dweights, Htomo.Cops.dweights;
+// yhd_save, Htomo_reconst_name, Htomo_reconst, overwrite=1;
+// trtt_4D_save, Htomo, Htomo_name, overwrite=1;
+// Htomo=trtt_2D_load("dataCLB_new_14_01_2016/results_dataset10_380x380x22_pixel1mm");
+// local Cops; eq_nocopy, Cops, Htomo.Cops;
+// Ck_list=Cops.Ck_list;
+// local dweights; eq_nocopy, dweights, Htomo.Cops.dweights;

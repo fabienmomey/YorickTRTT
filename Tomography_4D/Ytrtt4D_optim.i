@@ -701,7 +701,7 @@ func trtt_4D_optim_cost_function_quadratic_opky(cost_mat, x, &gx)
             } else {
                 thr_t = threshold(2);
                 thr_s = threshold(1);
-            }     
+            }
             fx_plus = rgl_mixed_ndpt(weight(1), thr_s, weight(2), thr_t, z, gx_plus, 1n);
             gx_plus = spl_interp_apply(trtt_extend(gx_plus,1n), wx, wy, wz, wt, 1);
         }
