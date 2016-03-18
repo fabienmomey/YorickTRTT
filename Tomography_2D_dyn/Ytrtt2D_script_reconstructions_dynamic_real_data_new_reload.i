@@ -66,7 +66,7 @@ for (i=1;i<=Nmu_t;++i) {
             eq_nocopy, Cops, Htomo.Cops;
             Ck_list=Cops.Ck_list;
         } else {
-	    write, format="%s\n", swrite(format="XR_mus%s_mut%s already done\n",name_mu_s(j),name_mu_t(i));
+	    write, format="XR_mus%s_mut%s already done \n", name_mu_s(j), name_mu_t(i);
 	}
     }
 }

@@ -118,7 +118,7 @@ mu_s=1.e-6; mu_t=1.0;
 // regulTV = h_new(weight=[mu_s, mu_s, mu_t], threshold = eps1, options = RGL_TOTVAR_ISOTROPIC);
 regulTV = h_new(weight=[mu_s, mu_t], threshold = [eps1, eps2], flag_separable=1n);
 
-XR = trtt_2D_optim_simu_launcher(Cops, trtt_cost_quadratic_mpy_opky, use_sparse_coefs=0n, x=XR.x, dweights=dweights, regulTV=regulTV, xmin=0.0, mem=5, viewer=1n, win_viewer=4, win_viewer2=60, maxiter=300, maxeval=300, verbose=1n);
+XR = trtt_2D_optim_simu_launcher(Cops, trtt_cost_quadratic_mpy_opky, use_sparse_coefs=0n, x=array(double,nx,ny,nt), dweights=dweights, regulTV=regulTV, xmin=0.0, mem=5, viewer=1n, win_viewer=4, win_viewer2=60, maxiter=300, maxeval=300, verbose=1n);
 trtt_plot_slice, XR.x, 16, 5;
 for(k=1; k<=5*nt; ++k) {
     trtt_plot_slice, XR.x, (k%nt), 6; pause, 50;

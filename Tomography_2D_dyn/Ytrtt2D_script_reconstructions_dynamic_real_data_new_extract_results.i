@@ -13,12 +13,15 @@ nt = 22;
 
 /* Recharger les données de reconstruction */
 Htomo=trtt_2D_load(datadir+datafile);
-KEYS=["R_eps1_1e-1_eps2_1e-6",
-      "R_eps1-1_eps2-1e-6",
-      "Reps1e-6",
-      "Reps1e-2",
-      "Reps1e-1",
-      "Reps1e0"];
+// KEYS=["R_eps1_1e-6_eps2_1e-6",
+//       "R_eps1_1e-1_eps2_1e-6",
+//       "R_eps1-1_eps2-1e-6",
+//       "Reps1e-6",
+//       "Reps1e-2",
+//       "Reps1e-1",
+//       "Reps1e0"];
+KEYS=["R_eps1_1e-6_eps2_1e-6",
+      "Reps1e-6"];
 
 /* h_keys(Htomo) */
 // Nbtot=0;
