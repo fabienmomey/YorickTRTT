@@ -54,8 +54,8 @@ for (i=1;i<=Nmu_t;++i) {
         if (is_void(h_get(Htomo,eps_name))) {
             h_set, Htomo, eps_name, h_new();
         }
-        if (is_void(h_get(h_get(Htomo,eps_name),swrite(format="XR_mus%s_mut%s\n",name_mu_s(j),name_mu_t(i))))) {
-            write, format="%s\n", swrite(format="XR_mus%s_mut%s",name_mu_s(j),name_mu_t(i));
+        if (is_void(h_get(h_get(Htomo,eps_name),swrite(format="XR_mus%s_mut%s",name_mu_s(j),name_mu_t(i))))) {
+            write, format="XR_mus%s_mut%s\n",name_mu_s(j),name_mu_t(i);
             regulTV = h_new(weight=[mu_s, mu_t], threshold = [eps1, eps2], flag_separable=1n);
             // regulTV = h_new(weight=[mu_s, mu_s, mu_t], threshold = eps, options = RGL_TOTVAR_ISOTROPIC);
             XR = trtt_2D_optim_simu_launcher(Cops, trtt_cost_quadratic_mpy_opky, use_sparse_coefs=0n, x=array(double,nx,ny,nt), dweights=dweights, regulTV=regulTV, xmin=0.0, mem=5, viewer=0n, win_viewer=4, win_viewer2=60, maxiter=2000, maxeval=2000, verbose=1n);
