@@ -238,10 +238,10 @@ regulTV = h_new(weight=[mu_s, mu_s, mu_s, mu_t], threshold = eps, options = RGL_
 // regulTV = h_new(weight=[mu_s, mu_t], threshold = [eps1,eps2], flag_separable=1n);
 
 x_iter = Htomo_reconst.x_iter;
-if (!is_void(x_iter)) h_set_copy, Htomo.X, "voxels", x_iter;
+if (is_void(x_iter)) x_iter=array(double,Htomo.X.nx,Htomo.X.ny,Htomo.X.nz,Htomo.X.nt);
 
 for (i=1; i<=20; ++i) {
-    XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_mpy_opky, mem=3, dweights=dweights, xmin=0.0, regulTV=regulTV, maxiter=10, verbose=1n);
+    XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_mpy_opky, x=x_iter, mem=5, dweights=dweights, xmin=0.0, regulTV=regulTV, maxiter=10, verbose=1n);
     
     h_set_copy, Htomo_reconst, XRname, XR;
     x_iter = XR.x;
