@@ -329,8 +329,8 @@ func trtt_4D_optim_cost_function_quadratic_mpy(x, &gx, cost_mat)
          * spline coefficients space */
         
         /* Adding to the global cost function */
-        gx_plus=array(double,dimsof(x));
         x = trtt_extend(spl_interp_apply(x, wx, wy, wz, wt),0n);
+        gx_plus=array(double,dimsof(x));
         if (!flag_separable) {
             /* Global spatio-temporal regularization */
             fx_plus = rgl_totvar(x, gx_plus, weight=weight, threshold=threshold, options=options);
@@ -457,8 +457,8 @@ func trtt_4D_optim_cost_function_quadratic(x, &gx, cost_mat)
          * spline coefficients space */
         
         /* Adding to the global cost function */
-        gx_plus=array(double,dimsof(x));
         x = trtt_extend(spl_interp_apply(x, wx, wy, wz, wt),0n);
+        gx_plus=array(double,dimsof(x));
         if (!flag_separable) {
             /* Global spatio-temporal regularization */
             fx_plus = rgl_totvar(x, gx_plus, weight=weight, threshold=threshold, options=options);
@@ -559,8 +559,8 @@ func trtt_4D_optim_cost_function_quadratic_mpy_opky(cost_mat, x, &gx)
          * spline coefficients space */
         
         /* Adding to the global cost function */
-        gx_plus=array(double,dimsof(x));
         x = trtt_extend(spl_interp_apply(x, wx, wy, wz, wt),0n);
+        gx_plus=array(double,dimsof(x));
         if (!flag_separable) {
             /* Global spatio-temporal regularization */
             fx_plus = rgl_totvar(x, gx_plus, weight=weight, threshold=threshold, options=options);
@@ -687,8 +687,8 @@ func trtt_4D_optim_cost_function_quadratic_opky(cost_mat, x, &gx)
          * spline coefficients space */
         
         /* Adding to the global cost function */
-        gx_plus=array(double,dimsof(x));
         x = trtt_extend(spl_interp_apply(x, wx, wy, wz, wt),0n);
+        gx_plus=array(double,dimsof(x));
         if (!flag_separable) {
             /* Global spatio-temporal regularization */
             fx_plus = rgl_totvar(x, gx_plus, weight=weight, threshold=threshold, options=options);
@@ -920,7 +920,7 @@ func trtt_4D_optim_simu_launcher(Cops, cost, x=, method=, mem=, frtol=, fatol=, 
         local TRTT_3D_REGULTERM; TRTT_3D_REGULTERM = 0n;
         local TRTT_3D_REGULTERM_ITER; TRTT_3D_REGULTERM_ITER = 0n;
         local TRTT_3D_RMSE; TRTT_3D_RMSE = 0n;
-        local TRTT_3D_RMSE_ITER; TRTT_3D_RMSE_ITER = 0n;
+        local TRTT_3D_RMSE_ITER; TRTT_3D_RMSEITER = 0n;
         if (cost==trtt4D_cost_quadratic || cost==trtt4D_cost_quadratic_mpy) {
             printer=std_viewer;
         } else if (cost==trtt4D_cost_quadratic_opky || cost==trtt4D_cost_quadratic_mpy_opky) {
