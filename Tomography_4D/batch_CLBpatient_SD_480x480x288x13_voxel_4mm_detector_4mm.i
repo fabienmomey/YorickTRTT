@@ -18,6 +18,7 @@ if (!is_void(open(Htomo_name, "rb", 1))) {
     write, format="---------- %s created ----------\n", Htomo_name;
     /* PATIENT */
     data_dir= "/home/momey/Data/data_CLB_patient_02-07-2012/";
+    // data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_patient_02-07-2012/img_1.3.46.423632.141000.1169042526.68/";
     /* FANTÔME MÉCANIQUE */
     // data_dir= "/home/momey/Data/data_CLB_09-11-2011/mvt3d/";
     
@@ -234,8 +235,8 @@ regulTV = h_new(weight=[mu_s, mu_s, mu_s, mu_t], threshold = eps, options = RGL_
 x_iter = Htomo_reconst.x_iter;
 if (is_void(x_iter)) x_iter=array(double,Htomo.X.nx,Htomo.X.ny,Htomo.X.nz,Htomo.X.nt);
 
-for (i=1; i<=5; ++i) {
-    XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_mpy_opky, x=x_iter, mem=5, dweights=dweights, xmin=0.0, regulTV=regulTV, maxiter=100, verbose=1n);
+for (i=1; i<=1; ++i) {
+    XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_mpy_opky, x=x_iter, mem=5, dweights=dweights, xmin=0.0, regulTV=regulTV, maxiter=50, verbose=1n);
     
     h_set_copy, Htomo_reconst, XRname, XR;
     x_iter = XR.x;
