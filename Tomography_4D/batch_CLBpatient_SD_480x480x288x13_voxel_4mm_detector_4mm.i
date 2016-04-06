@@ -1,8 +1,8 @@
 mp_include, "Ytrtt4D.i";
 // include, "Ytrtt4D.i", 1;
 
-Htomo_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_4mm";
-Htomo_reconst_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_4mm.rec";
+Htomo_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_4mm_detector_4mm";
+Htomo_reconst_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_4mm_detector_4mm.rec";
 
 mu_s = 1000.0;
 mu_t = 1.e6;
