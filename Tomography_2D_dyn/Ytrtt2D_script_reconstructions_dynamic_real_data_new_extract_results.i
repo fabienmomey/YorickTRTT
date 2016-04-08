@@ -22,6 +22,7 @@ Htomo=trtt_2D_load(datadir+datafile);
 //       "Reps1e0"];
 KEYS=["R_eps1_1e-6_eps2_1e-6",
       "Reps1e-6"];
+// KEYS=["R_eps1_1e-6_eps2_1e-6"];
 
 /* h_keys(Htomo) */
 // Nbtot=0;
@@ -33,7 +34,7 @@ KEYS=["R_eps1_1e-6_eps2_1e-6",
 // write, format=" \t Nb total = %d\n", Nbtot;
 
 /* Définir la taille NxN de la grille des ROIs */
-Ngrid=9;
+Ngrid=12;
 /* Définir la ROI à extraire (position et dimensions) */
 xroi=214;
 yroi=174;

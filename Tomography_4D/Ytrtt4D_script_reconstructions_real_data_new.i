@@ -1,13 +1,13 @@
-// include, "Ytrtt4D.i", 1;
-mp_include, "Ytrtt4D.i";
+include, "Ytrtt4D.i", 1;
+// mp_include, "Ytrtt4D.i";
 
 // data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_09-11-2011/img_1.3.46.423632.135428.1320854260.10/";
 // data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_09-11-2011/img_1.3.46.423632.135428.1320854585.13/";
-// data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_patient_02-07-2012/img_1.3.46.423632.141000.1169042526.68/";
+data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_patient_02-07-2012/img_1.3.46.423632.141000.1169042526.68/";
 
 /*** KUBILAI ***/
 // data_dir= "/home/momey/Data/data_CLB_patient_02-07-2012/";
-data_dir= "/home/momey/Data/data_CLB_09-11-2011/mvt3d/";
+// data_dir= "/home/momey/Data/data_CLB_09-11-2011/mvt3d/";
 DATA = yhd_restore(data_dir+"Data4TRTT");
 
 ntheta = DATA.ndata;
@@ -204,11 +204,11 @@ Htomo = trtt_4D_create_whole_simu_system(data,
 local Cops; eq_nocopy, Cops, Htomo.Cops;
 data=[];
 data = trtt3D_get_sino(Cops,dyn=1n);
-// for (k=1; k<=ndata; ++k) {
-//     mywindow, 0; fma; img_plot, data(..,k), cbar=1, vert=1, format="%.3f";
-//     palette, "gray.gp";
-//     pause, 10;
-// }
+for (k=1; k<=ndata; ++k) {
+    mywindow, 0; fma; img_plot, data(..,k), cbar=1, vert=1, format="%.3f";
+    palette, "gray.gp";
+    pause, 10;
+}
 
 Htomo_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_4mm";
 Htomo_reconst_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_4mm.rec";
@@ -234,14 +234,14 @@ eps2=1.e-6;
 // eps_name="Rglob_eps_1e-6";
 // h_set, Htomo_reconst, eps_name, h_new();
 
-mu_s =1000.0;
-mu_t =1000.0;
+mu_s =100.0;
+mu_t =100.0;
 // XR_name = "XR_mus1e0_mut1e0";
 
 // regulTV = h_new(weight=[mu_s, mu_s, mu_s, mu_t], threshold = eps2, options = RGL_TOTVAR_ISOTROPIC);
 regulTV = h_new(weight=[mu_s, mu_t], threshold = [eps1,eps2], flag_separable=1n);
 
-XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_mpy_opky, dweights=dweights, regulTV=regulTV, xmin=0.0, viewer=1n, win_viewer=3, win_viewer2=60, maxiter=10, maxeval=10, verbose=1n);
+XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_opky, dweights=dweights, regulTV=regulTV, xmin=0.0, viewer=1n, win_viewer=3, win_viewer2=60, maxiter=10, maxeval=10, verbose=1n);
 // trtt3D_plot_slice, XR.x, 3, 35, 6, 3;
 // h_set, h_get(Htomo_reconst,eps_name), XR_name, XR;
 
@@ -252,4 +252,4 @@ XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_mpy_opky, dweights=
 // Ck_list=Cops.Ck_list;
 // local dweights; eq_nocopy, dweights, Htomo.Cops.dweights;
 
-mp_exec, "if (!mp_rank) quit;";
+// mp_exec, "if (!mp_rank) quit;";
