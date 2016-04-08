@@ -1,1 +1,2 @@
 REGUL GLOBALE	mu_s = 1.e3;	mu_t = 1.e3;	eps = 1.e-6;
+REGUL SEPARABLE	mu_s = 1.e3;	mu_t = 1.e3;	eps1 = 1.e-6;     eps2=1.e-6;
