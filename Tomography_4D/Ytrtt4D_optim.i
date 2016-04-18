@@ -559,12 +559,14 @@ func trtt_4D_optim_cost_function_quadratic_mpy_opky(cost_mat, x, &gx)
          * spline coefficients space */
         
         /* Adding to the global cost function */
-        x = trtt_extend(spl_interp_apply(x, wx, wy, wz, wt),0n);
+        // x = trtt_extend(spl_interp_apply(x, wx, wy, wz, wt),0n);
+        x = spl_interp_apply(x, wx, wy, wz, wt);
         gx_plus=array(double,dimsof(x));
         if (!flag_separable) {
             /* Global spatio-temporal regularization */
             fx_plus = rgl_totvar(x, gx_plus, weight=weight, threshold=threshold, options=options);
-            gx_plus = spl_interp_apply(trtt_extend(gx_plus,1n), wx, wy, wz, wt, 1);
+            // gx_plus = spl_interp_apply(trtt_extend(gx_plus,1n), wx, wy, wz, wt, 1);
+            gx_plus = spl_interp_apply(gx_plus, wx, wy, wz, wt, 1);
         } else {
             /* Separable spatio-temporal regularization */
             if (numberof(threshold)==1) {
@@ -575,7 +577,8 @@ func trtt_4D_optim_cost_function_quadratic_mpy_opky(cost_mat, x, &gx)
                 thr_s = threshold(1);
             }     
             fx_plus = rgl_mixed_ndpt(weight(1), thr_s, weight(2), thr_t, x, gx_plus, 1n);
-            gx_plus = spl_interp_apply(trtt_extend(gx_plus,1n), wx, wy, wz, wt, 1);
+            // gx_plus = spl_interp_apply(trtt_extend(gx_plus,1n), wx, wy, wz, wt, 1);
+            gx_plus = spl_interp_apply(gx_plus, wx, wy, wz, wt, 1);
         }        
         
         /* Adding to the global cost function */
