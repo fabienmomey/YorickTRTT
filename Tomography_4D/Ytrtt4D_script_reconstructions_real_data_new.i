@@ -98,6 +98,8 @@ sig = array(double,ntheta);
 _n=read(sigfile, format="%f\n", sig);
 sig=sig(5:-1);
 
+window, 0; fma; plg, sig, dates, color="blue", marks=1, type="none", marker='\2';
+
 /* sur-échantillonnage du signal temporel */
 ndata2=1000*ndata;
 dates2=span(dates(1),dates(0),ndata2);
@@ -147,20 +149,24 @@ if(is_array(idtronc)) {
     sig3=sig(idtronc);
 }
 
+window, 1; fma; plg, sig3, dates, color="blue", marks=1, type="none", marker='\2';
+
 /* Normalisation des dates par les demi-périodes moyennes */
 nextr = numberof(dates4);
 newdates = array(double,ndata);
 t_old=dates4(1);
+cpt=0;
 for (u=1; u<=nextr-1; ++u) {
     Ttemp = dates4(u+1)-dates4(u);
     idTtemp = where(dates>=dates4(u) & dates<dates4(u+1));
     if(is_array(idTtemp)) {
-        newdates(idTtemp)=(dates(idTtemp)-t_old)*(half_tcycl/Ttemp)+(u-1)*half_tcycl;
+        newdates(idTtemp)=(dates(idTtemp)-t_old)*(half_tcycl/Ttemp)+cpt*half_tcycl;
+        cpt++;
     }
     t_old = dates4(u+1);
 }
 
-window, 1; plg, sig3, dates3(1)+newdates, color="blue";
+window, 2; fma; plg, sig3, dates3(1)+newdates, color="blue", marks=1, type="none", marker='\2';
 
 /* temporal spline degree */
 t_deg = 1;
@@ -204,19 +210,19 @@ Htomo = trtt_4D_create_whole_simu_system(data,
 local Cops; eq_nocopy, Cops, Htomo.Cops;
 data=[];
 data = trtt3D_get_sino(Cops,dyn=1n);
-for (k=1; k<=ndata; ++k) {
-    mywindow, 0; fma; img_plot, data(..,k), cbar=1, vert=1, format="%.3f";
-    palette, "gray.gp";
-    pause, 10;
-}
+// for (k=1; k<=ndata; ++k) {
+//     mywindow, 0; fma; img_plot, data(..,k), cbar=1, vert=1, format="%.3f";
+//     palette, "gray.gp";
+//     pause, 10;
+// }
 
-Htomo_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_4mm";
-Htomo_reconst_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_4mm.rec";
-if (!is_void(open(Htomo_reconst_name, "rb", 1))) {
-    Htomo_reconst = yhd_restore(Htomo_reconst_name);
-} else {
-    Htomo_reconst=h_new();
-}
+// Htomo_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_4mm";
+// Htomo_reconst_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_4mm.rec";
+// if (!is_void(open(Htomo_reconst_name, "rb", 1))) {
+//     Htomo_reconst = yhd_restore(Htomo_reconst_name);
+// } else {
+//     Htomo_reconst=h_new();
+// }
  
 /* GO RECONSTRUCTION ! */
 dweights = array(1.0,nu,nv,ndata);
@@ -238,10 +244,10 @@ mu_s =100.0;
 mu_t =100.0;
 // XR_name = "XR_mus1e0_mut1e0";
 
-// regulTV = h_new(weight=[mu_s, mu_s, mu_s, mu_t], threshold = eps2, options = RGL_TOTVAR_ISOTROPIC);
-regulTV = h_new(weight=[mu_s, mu_t], threshold = [eps1,eps2], flag_separable=1n);
+regulTV = h_new(weight=[mu_s, mu_s, mu_s, mu_t], threshold = eps2, options = RGL_TOTVAR_ISOTROPIC);
+// regulTV = h_new(weight=[mu_s, mu_t], threshold = [eps1,eps2], flag_separable=1n);
 
-XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_opky, dweights=dweights, regulTV=regulTV, xmin=0.0, viewer=1n, win_viewer=3, win_viewer2=60, maxiter=10, maxeval=10, verbose=1n);
+// XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_opky, dweights=dweights, regulTV=regulTV, xmin=0.0, viewer=1n, win_viewer=3, win_viewer2=60, maxiter=10, maxeval=10, verbose=1n);
 // trtt3D_plot_slice, XR.x, 3, 35, 6, 3;
 // h_set, h_get(Htomo_reconst,eps_name), XR_name, XR;
 
@@ -253,3 +259,10 @@ XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_opky, dweights=dwei
 // local dweights; eq_nocopy, dweights, Htomo.Cops.dweights;
 
 // mp_exec, "if (!mp_rank) quit;";
+
+t_index=array(double,ndata);
+Ck_list=Cops.Ck_list;
+for (k=1; k<=ndata; ++k) {
+    Ck=h_get(Cops,Ck_list(k));
+    t_index(k)=Ck.Ak.Yk.t_index;
+}
