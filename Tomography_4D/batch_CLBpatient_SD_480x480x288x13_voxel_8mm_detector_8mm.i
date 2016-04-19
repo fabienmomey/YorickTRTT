@@ -108,6 +108,8 @@ if (!is_void(open(Htomo_name, "rb", 1))) {
     sig = array(double,ntheta);
     _n=read(sigfile, format="%f\n", sig);
     sig=sig(5:-1);
+
+    // window, 0; fma; plg, sig, dates, color="blue", marks=1, type="none", marker='\2';
     
     /* sur-échantillonnage du signal temporel */
     ndata2=1000*ndata;
@@ -157,21 +159,25 @@ if (!is_void(open(Htomo_name, "rb", 1))) {
         ndata = numberof(theta);
         sig3=sig(idtronc);
     }
+
+    // window, 1; fma; plg, sig3, dates, color="blue", marks=1, type="none", marker='\2';
     
     /* Normalisation des dates par les demi-périodes moyennes */
     nextr = numberof(dates4);
     newdates = array(double,ndata);
     t_old=dates4(1);
+    cpt=0;
     for (u=1; u<=nextr-1; ++u) {
         Ttemp = dates4(u+1)-dates4(u);
         idTtemp = where(dates>=dates4(u) & dates<dates4(u+1));
         if(is_array(idTtemp)) {
-            newdates(idTtemp)=(dates(idTtemp)-t_old)*(half_tcycl/Ttemp)+(u-1)*half_tcycl;
+            newdates(idTtemp)=(dates(idTtemp)-t_old)*(half_tcycl/Ttemp)+cpt*half_tcycl;
+            cpt++;
         }
         t_old = dates4(u+1);
     }
     
-    // window, 1; plg, sig3, dates3(1)+newdates, color="blue";
+    // window, 2; fma; plg, sig3, dates3(1)+newdates, color="blue", marks=1, type="none", marker='\2';
     
     /* temporal spline degree */
     t_deg = 1;
