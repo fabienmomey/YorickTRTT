@@ -1,5 +1,5 @@
-include, "Ytrtt4D.i", 1;
-// mp_include, "Ytrtt4D.i";
+// include, "Ytrtt4D.i", 1;
+mp_include, "Ytrtt4D.i";
 
 // data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_09-11-2011/img_1.3.46.423632.135428.1320854260.10/";
 // data_dir= "/home/momey/Recherche_Tomographie/Data/data_CLB_09-11-2011/img_1.3.46.423632.135428.1320854585.13/";
@@ -98,7 +98,7 @@ sig = array(double,ntheta);
 _n=read(sigfile, format="%f\n", sig);
 sig=sig(5:-1);
 
-window, 0; fma; plg, sig, dates, color="blue", marks=1, type="none", marker='\2';
+// window, 0; fma; plg, sig, dates, color="blue", marks=1, type="none", marker='\2';
 
 /* sur-échantillonnage du signal temporel */
 ndata2=1000*ndata;
@@ -149,7 +149,7 @@ if(is_array(idtronc)) {
     sig3=sig(idtronc);
 }
 
-window, 1; fma; plg, sig3, dates, color="blue", marks=1, type="none", marker='\2';
+// window, 1; fma; plg, sig3, dates, color="blue", marks=1, type="none", marker='\2';
 
 /* Normalisation des dates par les demi-périodes moyennes */
 nextr = numberof(dates4);
@@ -166,7 +166,7 @@ for (u=1; u<=nextr-1; ++u) {
     t_old = dates4(u+1);
 }
 
-window, 2; fma; plg, sig3, dates3(1)+newdates, color="blue", marks=1, type="none", marker='\2';
+// window, 2; fma; plg, sig3, dates3(1)+newdates, color="blue", marks=1, type="none", marker='\2';
 
 /* temporal spline degree */
 t_deg = 1;
@@ -247,7 +247,7 @@ mu_t =100.0;
 regulTV = h_new(weight=[mu_s, mu_s, mu_s, mu_t], threshold = eps2, options = RGL_TOTVAR_ISOTROPIC);
 // regulTV = h_new(weight=[mu_s, mu_t], threshold = [eps1,eps2], flag_separable=1n);
 
-// XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_opky, dweights=dweights, regulTV=regulTV, xmin=0.0, viewer=1n, win_viewer=3, win_viewer2=60, maxiter=10, maxeval=10, verbose=1n);
+XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_mpy_opky, dweights=dweights, regulTV=regulTV, xmin=0.0, viewer=1n, win_viewer=3, win_viewer2=60, maxiter=100, maxeval=100, verbose=1n);
 // trtt3D_plot_slice, XR.x, 3, 35, 6, 3;
 // h_set, h_get(Htomo_reconst,eps_name), XR_name, XR;
 
@@ -260,9 +260,13 @@ regulTV = h_new(weight=[mu_s, mu_s, mu_s, mu_t], threshold = eps2, options = RGL
 
 // mp_exec, "if (!mp_rank) quit;";
 
-t_index=array(double,ndata);
-Ck_list=Cops.Ck_list;
-for (k=1; k<=ndata; ++k) {
-    Ck=h_get(Cops,Ck_list(k));
-    t_index(k)=Ck.Ak.Yk.t_index;
-}
+// t_index=array(double,ndata);
+// Ck_list=Cops.Ck_list;
+// for (k=1; k<=ndata; ++k) {
+//     Ck=h_get(Cops,Ck_list(k));
+//     t_index(k)=Ck.Ak.Yk.t_index;
+// }
+
+// for (i=1;i<=nt;++i){
+//     fits_write, swrite(format="x2_%02d.fits",i), XR.x(:,:,:,i), overwrite=1n;
+// }

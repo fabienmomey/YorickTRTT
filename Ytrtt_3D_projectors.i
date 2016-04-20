@@ -298,7 +298,17 @@ func trtt_single_3D_time_interpolator(X, Yk, status=)
     }
 
     /* Create the interpolator */
-    wt = spl_interp_coefs_new_spline(t_index, nt, t_deg);
+    if (t_deg>1) {
+        wt = spl_interp_coefs_new_spline(t_index, nt, t_deg);
+    } else {
+        n=nt;
+        m=2;
+        p=2;
+        j=long([floor(t_index),ceil(t_index)]%nt);
+        pe=t_index-floor(t_index);
+        w=[1-pe,pe];
+        wt=h_new(m=m,n=n,p=p,j=j,w=w);
+    }
 
     p = h_new(wt = wt,
               nx = nx,
