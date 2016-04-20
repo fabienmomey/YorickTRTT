@@ -34,7 +34,7 @@ KEYS=["R_eps1_1e-6_eps2_1e-6",
 // write, format=" \t Nb total = %d\n", Nbtot;
 
 /* Définir la taille NxN de la grille des ROIs */
-Ngrid=12;
+Ngrid=15;
 /* Définir la ROI à extraire (position et dimensions) */
 xroi=214;
 yroi=174;
@@ -61,7 +61,7 @@ for (k=1; k<=numberof(KEYS); ++k) {
         roi=XR.x(xroi:(xroi+Nroi-1),yroi:(yroi+Nroi-1),);
   
         /* Positionner la ROI dans l'image globale */
-        m=cpt%Ngrid;
+        m=long((cpt-1)%Ngrid+1);
         l=long(floor((cpt-1)/Ngrid)+1);
 
         Image((m-1)*(Nroi+2)+1:(m-1)*(Nroi+2)+Nroi,(l-1)*(Nroi+2)+1:(l-1)*(Nroi+2)+Nroi,)=roi;
