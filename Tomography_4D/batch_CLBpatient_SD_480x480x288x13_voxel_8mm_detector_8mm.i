@@ -1,8 +1,8 @@
 mp_include, "Ytrtt4D.i";
 // include, "Ytrtt4D.i", 1;
 
-Htomo_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_8mm_detector_8mm";
-Htomo_reconst_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_8mm_detector_8mm.rec";
+Htomo_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_8mm_detector_8mm_new";
+Htomo_reconst_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_8mm_detector_8mm_new.rec";
 
 mu_s = 1.e3;
 mu_t = 1.e3;
@@ -241,7 +241,7 @@ regulTV = h_new(weight=[mu_s, mu_s, mu_s, mu_t], threshold = eps, options = RGL_
 x_iter = Htomo_reconst.x_iter;
 if (is_void(x_iter)) x_iter=array(double,Htomo.X.nx,Htomo.X.ny,Htomo.X.nz,Htomo.X.nt);
 
-for (i=1; i<=10; ++i) {
+for (i=1; i<=50; ++i) {
     XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_mpy_opky, x=x_iter, mem=5, dweights=dweights, xmin=0.0, regulTV=regulTV, maxiter=100, verbose=1n);
     
     h_set_copy, Htomo_reconst, XRname, XR;
