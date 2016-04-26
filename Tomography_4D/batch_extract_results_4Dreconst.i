@@ -47,7 +47,7 @@ for (k=1; k<=numberof(KEYS); ++k) {
         roi=XR.x(xroi:(xroi+Nroi-1),yroi:(yroi+Nroi-1),zroi:(zroi+Nroi_z-1),);
         
         /* Positionner la ROI dans l'image globale */
-        m=k%Ngrid;
+        m=long((k-1)%Ngrid+1);
         l=long(floor((k-1)/Ngrid)+1);
         
         Image((m-1)*(Nroi+2)+1:(m-1)*(Nroi+2)+Nroi,(l-1)*(Nroi+2)+1:(l-1)*(Nroi+2)+Nroi,1:Nroi_z,)=roi;
