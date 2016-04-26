@@ -4,10 +4,10 @@ mp_include, "Ytrtt4D.i";
 Htomo_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_4mm_detector_4mm";
 Htomo_reconst_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_4mm_detector_4mm.rec";
 
-mu_s = 1000.0;
-mu_t = 1.e6;
+mu_s = 1.e3;
+mu_t = 1.e3;
 eps = 1.e-6; // eps1=1.0; eps2=1.e-6;
-XRname = "XRglob_mus1e3_mut1e6_eps1e-6"; // XRname = "XRsepa_mus1e0_mut1e0_eps1_1e0_eps2_1e-6";
+XRname = "XRglob_mus1e3_mut1e3_eps1e-6"; // XRname = "XRsepa_mus1e0_mut1e0_eps1_1e0_eps2_1e-6";
 
 if (!is_void(open(Htomo_name, "rb", 1))) {
     write, format="---------- %s reloaded ----------\n", Htomo_name;
@@ -162,11 +162,13 @@ if (!is_void(open(Htomo_name, "rb", 1))) {
     nextr = numberof(dates4);
     newdates = array(double,ndata);
     t_old=dates4(1);
+    cpt=0;
     for (u=1; u<=nextr-1; ++u) {
         Ttemp = dates4(u+1)-dates4(u);
         idTtemp = where(dates>=dates4(u) & dates<dates4(u+1));
         if(is_array(idTtemp)) {
-            newdates(idTtemp)=(dates(idTtemp)-t_old)*(half_tcycl/Ttemp)+(u-1)*half_tcycl;
+            newdates(idTtemp)=(dates(idTtemp)-t_old)*(half_tcycl/Ttemp)+cpt*half_tcycl;
+            cpt++;
         }
         t_old = dates4(u+1);
     }
