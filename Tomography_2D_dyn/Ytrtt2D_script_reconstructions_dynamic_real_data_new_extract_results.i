@@ -72,6 +72,7 @@ for (k=1; k<=numberof(KEYS); ++k) {
         else
             write, f, format="N°%d \t ; \t Case [%d,%d] \t ; \t REGUL GLOB \t ; \t threshold=%.2e \t ; \t weight=[%.2e,%.2e]\n", cpt, m, l, threshold, weight(1), weight(3);
     }
+    cpt=l*Ngrid;
 }
 /* Enregistrer l'image globale */
 fits_write, datadir+imagefile, Image, overwrite=1n;
