@@ -165,11 +165,13 @@ if (!is_void(open(Htomo_name, "rb", 1))) {
     nextr = numberof(dates4);
     newdates = array(double,ndata);
     t_old=dates4(1);
+    cpt=0;
     for (u=1; u<=nextr-1; ++u) {
         Ttemp = dates4(u+1)-dates4(u);
         idTtemp = where(dates>=dates4(u) & dates<dates4(u+1));
         if(is_array(idTtemp)) {
-            newdates(idTtemp)=(dates(idTtemp)-t_old)*(half_tcycl/Ttemp)+(u-1)*half_tcycl;
+            newdates(idTtemp)=(dates(idTtemp)-t_old)*(half_tcycl/Ttemp)+cpt*half_tcycl;
+            cpt++;
         }
         t_old = dates4(u+1);
     }
