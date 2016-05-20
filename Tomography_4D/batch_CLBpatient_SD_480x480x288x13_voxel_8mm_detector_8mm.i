@@ -5,9 +5,9 @@ Htomo_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_8mm_detector
 Htomo_reconst_name="./preliminary_results/CLBpatient_SD_120x120x72x13_voxel_8mm_detector_8mm_new.rec";
 
 mu_s = 1.e3;
-mu_t = 1.e5;
+mu_t = 1.e7;
 eps = 1.e-6; // eps1=1.0; eps2=1.e-6;
-XRname = "XRglob_mus1e3_mut1e5_eps1e-6"; // XRname = "XRsepa_mus1e0_mut1e0_eps1_1e0_eps2_1e-6";
+XRname = "XRglob_mus1e3_mut1e7_eps1e-6"; // XRname = "XRsepa_mus1e0_mut1e0_eps1_1e0_eps2_1e-6";
 
 if (!is_void(open(Htomo_name, "rb", 1))) {
     write, format="---------- %s reloaded ----------\n", Htomo_name;
