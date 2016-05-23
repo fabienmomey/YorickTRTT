@@ -14,6 +14,8 @@ if (!is_void(open(Htomo_name, "rb", 1))) {
     Htomo = trtt_4D_load(Htomo_name);
     Htomo_reconst = yhd_restore(Htomo_reconst_name);
     local dweights; eq_nocopy, dweights, Htomo.Cops.dweights;
+    s_deg = Htomo.X.s_deg;
+    t_deg = Htomo.X.t_deg;
 } else {
     write, format="---------- %s created ----------\n", Htomo_name;
     /* PATIENT */
@@ -237,11 +239,11 @@ regulTV = h_new(weight=[mu_s, mu_s, mu_s, mu_t], threshold = eps, options = RGL_
 x_iter = Htomo_reconst.x_iter;
 if (is_void(x_iter)) x_iter=array(double,Htomo.X.nx,Htomo.X.ny,Htomo.X.nz,Htomo.X.nt);
 
-for (i=1; i<=1; ++i) {
-    XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_mpy_opky, x=x_iter, mem=5, dweights=dweights, xmin=0.0, regulTV=regulTV, maxiter=50, verbose=1n);
+for (i=1; i<=5; ++i) {
+    XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_mpy_opky, x=x_iter, mem=5, dweights=dweights, xmin=0.0, regulTV=regulTV, maxiter=100, verbose=1n);
     
     h_set_copy, Htomo_reconst, XRname, XR;
-    x_iter = XR.x;
+    x_iter = spl_spline_samples_to_coefficients(XR.x,s_deg,s_deg,s_deg,t_deg);
     h_set_copy, Htomo_reconst, "x_iter", x_iter;
     yhd_save, Htomo_reconst_name, Htomo_reconst, overwrite=1n;    
 }

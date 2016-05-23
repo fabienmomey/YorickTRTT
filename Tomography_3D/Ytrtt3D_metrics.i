@@ -222,6 +222,7 @@ func trtt_3D_optim_standard_viewer_for_opky(cost_mat, x, fx, gx, iter, eval, t)
     nz = cost_mat.data.nz;
     kz = long(floor(nz/2.0));
     nwin = cost_mat.data.win_viewer;
+    nwin2 = cost_mat.data.win_viewer2;
     cmin = cost_mat.data.cmin;
     cmax = cost_mat.data.cmax;
 
@@ -237,6 +238,12 @@ func trtt_3D_optim_standard_viewer_for_opky(cost_mat, x, fx, gx, iter, eval, t)
         trtt3D_plot_slice, x, 3, kz, idt, nwin, cmin=cmin, cmax=cmax;
     }
     cmap, "gray";
+
+    if (!is_void(nwin2)) {
+        window, nwin2; plg, fx, iter, marks=1, marker='\2', color="black", width=4.0, type="none";
+        logxy, 0, 1;
+        limits, "e", "e", fx/10.0, "e";
+    }
 
     pause, 1;
 }
