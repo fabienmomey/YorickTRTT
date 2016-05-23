@@ -9,7 +9,7 @@ mu_t = 1.e3;
 //eps = 1.e-6;
 eps1=1.e-6;
 eps2=1.e-6;
-XRname = "XRsepa_mus1e3_mut1e6_eps1e-6"; // XRname = "XRsepa_mus1e0_mut1e0_eps1_1e0_eps2_1e-6";
+XRname = "XRsepa_mus1e3_mut1e3_eps1e-6"; // XRname = "XRsepa_mus1e0_mut1e0_eps1_1e0_eps2_1e-6";
 
 if (!is_void(open(Htomo_name, "rb", 1))) {
     write, format="---------- %s reloaded ----------\n", Htomo_name;
@@ -240,7 +240,7 @@ local Cops; eq_nocopy, Cops, Htomo.Cops;
 x_iter = Htomo_reconst.x_iter;
 if (is_void(x_iter)) x_iter=array(double,Htomo.X.nx,Htomo.X.ny,Htomo.X.nz,Htomo.X.nt);
 
-for (i=1; i<=10; ++i) {
+for (i=1; i<=200; ++i) {
     XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_mpy_opky, x=x_iter, mem=5, dweights=dweights, xmin=0.0, regulTV=regulTV, maxiter=100, verbose=1n, viewer=0);
     //  XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_opky, x=x_iter, mem=5, dweights=dweights, xmin=0.0, regulTV=regulTV, maxiter=100, verbose=1n,viewer=0);
     
