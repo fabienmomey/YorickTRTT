@@ -20,28 +20,31 @@ ndata=numberof(theta);
 local data; eq_nocopy, data, DATA.data(..,5:-1);
 
 /* TOMOBJ */
-nx = 60;
-ny = 60;
-nz = 36;
+nx = 120;
+ny = 120;
+nz = 72;
 nt = 13;
 x_off = 72.0; //FIXME: in mm
 y_off = 0.0; //FIXME: in mm
 z_off = 0.0; //FIXME: in mm
-s_scl = 8.0; //FIXME: in mm
+s_scl = 4.0; //FIXME: in mm
 s_deg = 3;
 size_footprint = 10000;
 
 /* TOMDATA */
-nv = DATA.nv/8;
-nu = DATA.nu/8;
+nv = DATA.nv/4;
+nu = DATA.nu/4;
 u_off = DATA.uoff(5:-1);
 v_off = DATA.voff(5:-1); //FIXME: in mm
-u_scl = 8.0*DATA.u_scl; //FIXME: in mm
-v_scl = 8.0*DATA.v_scl; //FIXME: in mm
+u_scl = 4.0*DATA.u_scl; //FIXME: in mm
+v_scl = 4.0*DATA.v_scl; //FIXME: in mm
 t_index = 0.0;
 
 /* UNDERSAMPLING OF PROJECTIONS BY 4 */
-data=yeti_convolve(data,kernel=[0.,0.125,0.125,0.125,0.125,0.125,0.125,0.125,0.125],which=[1,2])(::8,::8,:);
+// data=yeti_convolve(data,kernel=[0.,0.125,0.125,0.125,0.125,0.125,0.125,0.125,0.125],which=[1,2])(::8,::8,:);
+data=yeti_convolve(data,kernel=[0.,0.25,0.25,0.25,0.25],which=[1,2])(::4,::4,:);
+
+
 
 /* PROJECTOR */
 mode = TRTT_CONE_BEAM;
@@ -250,7 +253,7 @@ mu_t =1.e6;
 regulTV = h_new(weight=[mu_s, mu_s, mu_s, mu_t], threshold = eps2, options = RGL_TOTVAR_ISOTROPIC);
 // regulTV = h_new(weight=[mu_s, mu_t], threshold = [eps1,eps2], flag_separable=1n);
 
-XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_opky,x=XR.x, dweights=dweights, regulTV=regulTV, xmin=0.0, viewer=1n, win_viewer=3, win_viewer2=60, maxiter=1, maxeval=10000, verbose=1n);
+XR = trtt_4D_optim_simu_launcher(Cops, trtt4D_cost_quadratic_opky, dweights=dweights, regulTV=regulTV, xmin=0.0, viewer=1n, win_viewer=3, win_viewer2=60, maxiter=10000, maxeval=10000, verbose=1n);
 // trtt3D_plot_slice, XR.x, 3, 35, 6, 3;
 // h_set, h_get(Htomo_reconst,eps_name), XR_name, XR;
 
